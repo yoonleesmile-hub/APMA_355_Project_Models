@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 
 # -----------------------------
 # Model parameters
@@ -152,4 +153,24 @@ ax.set_ylabel(r"Temperature $T$ [$^\circ$C]")
 ax.set_title("Representative Solutions in the Three-Equilibria Regime")
 ax.grid(True)
 
+# color legend
+
+legend_elements = [
+    Line2D([0], [0], color="purple",   linewidth=2, label=r"$T_0 > T_{\mathrm{warm}}$: cooling toward warm equilibrium"),
+    Line2D([0], [0], color="green",    linewidth=2, label=r"$T_0$ just above $T_{\mathrm{medium}}$: warming toward $T_{\mathrm{warm}}$"),
+    Line2D([0], [0], color="orange",   linewidth=2, label=r"$T_0$ just below $T_{\mathrm{medium}}$: cooling toward $T_{\mathrm{cold}}$"),
+    Line2D([0], [0], color="deeppink", linewidth=2, label=r"$T_0 < T_{\mathrm{cold}}$: warming toward cold equilibrium"),
+]
+
+ax.legend(
+    handles=legend_elements,
+    loc="upper left",
+    bbox_to_anchor=(1.02, 1),
+    borderaxespad=0,
+    fontsize=9,
+    framealpha=0.85,
+)
+
+plt.tight_layout()
+plt.savefig("plot.png", bbox_inches="tight")  # bbox_inches="tight" ensures the legend isn't clipped
 plt.show()
